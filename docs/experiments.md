@@ -27,5 +27,34 @@ VisionPick Arm의 실험 조건 및 결과 기록.
 
 ---
 
-## EXP-002 | To Be Added
+
+## EXP-002 | 4-DOF CAD Motion Test
+**Date:** 2026-10-22
+
+### Objective
+Fusion 360에서 4축 로봇팔의 관절 동작 및 물체 접근 가능성 확인.
+
+### Setup
+- L1: 100mm
+- L2: 80mm
+- Shoulder Height: 70mm
+- Target Object: 30mm Cube
+- Tool: Fusion 360
+
+### Results
+- Base / Shoulder / Elbow / Wrist 구동 성공
+- Revolute 및 Rigid Joint 연결 확인
+- 30mm 블록에 대한 집게 접근 자세 구현
+- 손목 회전을 통한 집게 기울기 조절 확인
+
+### Limitations
+- 일부 목표 위치에서 자세 제약 확인
+- 관절 각도 및 도달 범위 정량 분석 미완료
+- 실제 하중과 모터 성능 미반영
+
+### Next Steps
+- 4축 기구학 계산
+- 작업 가능 범위 검증
+- 관절 토크 및 모터 선정
+
 
