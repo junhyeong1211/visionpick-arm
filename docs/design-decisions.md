@@ -2,34 +2,28 @@
 
 VisionPick Arm의 주요 설계 결정 및 근거 기록.
 
-## 2026-10-22 | Initial Design
+## 2026-10-22 | Wrist Joint Added
 
-### Mechanical Structure
-- 3축 로봇팔 + 1축 그리퍼
-- 산업용 오픈 프레임 디자인
-- Fusion 360 직접 설계
-- PLA+ 기반 3D 프린팅 예정
+### Decision
+기존 3축 + 그리퍼 구조를 4축 + 그리퍼 구조로 변경.
 
-### Vision System
-- HUSKYLENS 1 사용
-- 색상 인식 우선 적용
-- 독립형 상부 고정 카메라
-- 카메라 높이: 250mm (임시)
+### Reason
+- 손목 회전축 없이 집게 자세를 유지하기 어려움
+- 물체 집기 시 집게의 수직 접근 필요
+- 관절 자세와 집게 방향을 보다 독립적으로 제어하기 위함
 
-### Workspace
-- 작업대: 약 300 × 300mm
-- 집기 반경: 약 140mm (임시)
-- 집기 및 배출 위치를 유사 반경에 배치
+### Updated Configuration
+- J1: Base Rotation
+- J2: Shoulder Pitch
+- J3: Elbow Pitch
+- J4: Wrist Pitch
+- J5: Gripper Actuation
 
-### Gripper
-- 양쪽 연동형 2핑거 구조
-- SG90 서보모터 활용 검토
-- 목표 개방 폭: 45~50mm
+### Trade-offs
+- 구동 모터 총 5개 필요
+- 손목 모터 추가에 따른 관절 토크 증가
+- 구조 및 제어 알고리즘 복잡도 증가
 
-### Pending Decisions
-- 링크 길이 및 관절 구조 검증
-- 모터 토크 계산 및 모델 선정
-- 전원 공급 구조
-- 베어링 및 체결 부품 규격
-- 최종 CAD 치수
+### Next
+기구학 및 토크 계산 후 실제 모터 선정.
 
