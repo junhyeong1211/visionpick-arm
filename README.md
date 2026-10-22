@@ -224,26 +224,32 @@ Y: 123
 
 **Result:** 센서 연결 및 데이터 수신 성공.
 
-### 2026.10.22 — Object Recognition & System Design
-
-**Vision**
-
-- 빨강·파랑 30 mm 실험용 블록 제작
-- HUSKYLENS Color Recognition 학습
-- 빨강(ID1), 파랑(ID2) 동시 인식 확인
-- Arduino C++에서 목표 ID 필터링 구현
-- 지정된 물체의 ID 및 이미지 좌표 출력 성공
+### 2026.10.22 — Fusion 360 Concept CAD
 
 **Mechanical Design**
 
-- 3축 로봇팔 + 연동형 2핑거 그리퍼 구조 선정
-- 산업용 오픈 프레임 디자인 채택
-- 독립형 상부 고정 카메라 구조 선정
-- 카메라 높이 20/25/30 cm 비교 실험
-- 25 cm를 초기 설치 높이로 선정
-- 집기·배출 위치 및 작업 반경 개념 설계
+- Fusion 360 기반 4-DOF 로봇팔 Concept CAD 제작
+- User Parameters를 활용한 링크 길이 및 관절 위치 정의
+- Base, Shoulder, Elbow, Wrist 구조 모델링
+- Revolute / Rigid Joint를 이용한 조립 및 구동 검증
+- Drive Joint를 통해 4개 회전축의 독립 구동 확인
+- 30mm 정육면체 및 Gripper Placeholder 모델링
+- 블록 접근 및 손목 자세 유지 가능성 확인
 
-**Result:** 비전 인식 및 목표 물체 선택 기능 구현 완료. 기계 구조 개념 설계 완료.
+**Design Changes**
+
+- 기존 3축 구조에서 Wrist Pitch 축을 추가한 4축 구조로 변경
+- 집게 자세 제어 기능 확보를 위한 구조 변경
+- 최종 구동 구성: 4-DOF + 1-DOF Gripper
+
+**Limitations**
+
+- 일부 위치에서 집게 수직 자세 및 접근 제한 확인
+- 실제 관절 회전 범위와 기구 간섭 검증 필요
+- 모터, 베어링, 체결 구조 미반영
+- 현재 모델은 제작용 CAD가 아닌 Concept CAD
+
+**Result:** 4축 로봇팔의 기본 조립 및 관절 구동 검증 완료.
 
 ## 8. Roadmap
 
