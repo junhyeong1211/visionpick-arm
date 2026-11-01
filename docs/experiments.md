@@ -1,63 +1,72 @@
 # Experiments
 
-VisionPick Arm V1의 실험 조건, 계산 결과 및 검증 기록.
+VisionPick Arm의 실험 조건, 계산 결과, 제작용 CAD 확인 및 실제 하드웨어 검증 기록.
 
-- **Project:** VisionPick Arm V1
-- **Configuration:** 4-DOF Robot Arm + 1-DOF Gripper
-- **Last Updated:** 2026-10-27
+- **프로젝트:** VisionPick Arm (4축 로봇팔 + 1축 그리퍼)
+- **최근 업데이트:** 2026-11-01
+
+> **기록 원칙:** 수학적 계산, Fusion CAD 확인, 실물 치수 측정, 정적 장착 확인, 실제 모터 구동 및 3D 출력 후 조립 검증을 구분하여 기록한다.
 
 ---
 
-## EXP-001 | HUSKYLENS Color Recognition
+## EXP-001 | HUSKYLENS 색상 인식
 
-**Date:** 2026-10-22  
-**Status:** Completed — Initial Test
+**일자:** 2026-10-22  
+**상태:** 초기 인식 시험 완료
 
-### Objective
+### 목적
+
 빨강·파랑 블록 인식 및 Arduino 좌표 수신 검증.
 
-### Setup
+### 실험 환경
+
 - HUSKYLENS 1
-- Arduino UNO (I2C)
+- Arduino UNO(I2C)
 - 30 × 30 × 30mm 실험용 블록
 - 카메라 높이: 20 / 25 / 30cm
 
-### Results
-- Red: ID1 인식 성공
-- Blue: ID2 인식 성공
+### 결과
+
+- 빨강 ID1 인식 성공
+- 파랑 ID2 인식 성공
 - 두 블록 동시 인식 성공
 - Arduino C++ 목표 ID 필터링 구현 및 동작 확인
 - 25cm 높이를 초기 설치 기준으로 선정
 
-### Limitations
+### 한계
+
 - 조명 변화에 따른 정량적 인식률 미측정
 - 픽셀 좌표의 실제 거리 변환 미구현
 
 ---
 
-## EXP-002 | 4-DOF CAD Motion Test
+## EXP-002 | 4축 Concept CAD 동작 시험
 
-**Date:** 2026-10-22  
-**Status:** Completed — Concept Verification
+**일자:** 2026-10-22  
+**상태:** 개념 설계 단계 동작 확인 완료
 
-### Objective
-Fusion 360에서 4축 로봇팔의 관절 동작 및 물체 접근 가능성 확인.
+### 목적
 
-### Setup
+Fusion 360에서 4축 로봇팔의 관절 동작 및 블록 접근 가능성 확인.
+
+### 조건
+
 - L1: 100mm
 - L2: 80mm
-- Shoulder Height: 70mm
-- Target Object: 30mm Cube
-- Tool: Fusion 360
+- 어깨 높이: 70mm
+- 대상: 30mm 정육면체
+- 도구: Fusion 360
 
-### Results
+### 결과
+
 - Base / Shoulder / Elbow / Wrist 관절 구동 성공
 - Revolute 및 Rigid Joint 연결 확인
 - 30mm 블록에 대한 집게 접근 자세 구현
 - 손목 회전을 통한 집게 기울기 조절 확인
-- 기존 3축 구조에서 손목 Pitch 축을 추가한 4축 구조로 변경
+- 기존 3축 구조에 손목 Pitch 축 추가
 
-### Limitations
+### 한계
+
 - 일부 목표 위치에서 자세 제약 확인
 - 전체 작업 가능 범위의 정량적 검증 미완료
 - 모터·베어링·실제 하중 미반영
@@ -65,22 +74,24 @@ Fusion 360에서 4축 로봇팔의 관절 동작 및 물체 접근 가능성 확
 
 ---
 
-## EXP-003 | Forward & Inverse Kinematics
+## EXP-003 | 순기구학·역기구학 계산
 
-**Date:** 2026-10-23  
-**Status:** Completed — Mathematical Validation
+**일자:** 2026-10-23  
+**상태:** 수학적 계산 검증 완료
 
-### Objective
-4축 로봇팔의 순기구학(FK), 역기구학(IK), 손목 자세 제어 원리 검증.
+### 목적
 
-### Setup
-- L1: 100mm
-- L2: 80mm
-- Shoulder Height: 70mm
+4축 로봇팔의 FK·IK 및 손목 자세 제어 원리 검증.
+
+### 조건
+
+- L1: 100mm / L2: 80mm
+- 어깨 높이: 70mm
 - Base / Shoulder / Elbow / Wrist 구성
 - 종이 계산 및 계산기 사용
 
-### Results
+### 결과
+
 - 2링크 평면 FK 계산 완료
 - 코사인 법칙 기반 IK 계산 완료
 - Elbow-up / Elbow-down 두 가지 해 계산
@@ -88,216 +99,331 @@ Fusion 360에서 4축 로봇팔의 관절 동작 및 물체 접근 가능성 확
 - 손목 자세 보정각 계산
 - TCP 오프셋을 고려한 손목 목표 좌표 계산 연습
 
-### Key Findings
-- FK: 관절 각도로부터 로봇팔 끝점 위치 계산
-- IK: 목표 위치로부터 관절 각도 계산
-- 동일한 목표 위치에 복수의 IK 해 존재 가능
-- 실제 제어에서는 관절 제한, 충돌, TCP 오프셋 고려 필요
+### 핵심 확인 내용
 
-### Limitations
+FK는 관절각으로 끝점 좌표를 계산하며, IK는 목표 위치에서 관절각을 계산함. 동일 목표 위치에 복수의 IK 해가 존재할 수 있음.
+
+### 한계
+
 - 모터 회전 제한 미반영
-- 서보모터 실제 영점·회전 방향 미보정
+- 실제 영점·회전 방향 보정 전
 - Arduino C++ FK·IK 함수 구현 전
 
 ---
 
-## EXP-004 | FK·IK Verification in Fusion 360
+## EXP-004 | Fusion 360 FK·IK 검증
 
-**Date:** 2026-10-26  
-**Status:** Completed — Planar Coordinate Verification
+**일자:** 2026-10-26  
+**상태:** XZ 평면 좌표 검증 완료
 
-### Objective
-수학적으로 계산한 FK·IK 결과와 Fusion 360 관절 구동 결과 비교.
+### 목적
 
-### Setup
-- Fusion File: `VisionPick_Concept_v01`
-- L1: 100mm
-- L2: 80mm
-- Shoulder Height: 70mm
-- Revolute Joint 기반 관절 구동
+수학적 FK·IK 계산 결과와 Fusion 360 관절 구동 결과 비교.
 
-### Test 1 — Forward Kinematics
+### 조건
 
-수학적 입력 조건:
+- Fusion 파일: `VisionPick_Concept_v01`
+- L1: 100mm / L2: 80mm
+- 어깨 높이: 70mm
+- Revolute Joint 기반 구동
 
-- Shoulder: +30°
-- Elbow: -60°
+### 시험 1 — 순기구학(FK)
 
-| Coordinate | Calculated | Fusion |
+수학적 입력: Shoulder +30°, Elbow -60°.
+
+| 좌표 | 계산값 | Fusion |
 |---|---:|---:|
 | X | 155.885mm | 155.885mm |
 | Z | 80mm | 80mm |
 
-**Result:** XZ 평면 좌표 일치 확인.
+**결과:** XZ 평면 좌표 일치.
 
-Fusion에서 해당 자세를 재현할 때 Shoulder Joint 입력은 -30°였음. 수학적 각도와 CAD Joint 입력각의 부호 차이 확인.
+Fusion에서 자세를 재현할 때 Shoulder Joint 입력은 -30°였음. 수학적 각도와 CAD Joint 입력 부호 차이 확인.
 
-### Test 2 — Inverse Kinematics
+### 시험 2 — 역기구학(IK)
 
-목표 손목 좌표:
+목표 손목 좌표: X = 100mm, Z = 150mm.
 
-- X: 100mm
-- Z: 150mm
+계산된 관절 자세를 Fusion에 적용하여 목표 XZ 좌표 도달 확인.
 
-Fusion Joint에 계산된 관절 자세 적용 후 목표 XZ 좌표 도달 확인.
+### 한계
 
-**Result:** IK 목표 위치 재현 성공.
-
-### Limitations
-- J2의 Y좌표 0mm, J4의 Y좌표 -8mm로 측면 오프셋 존재
-- XZ 평면 검증 결과이며 완전한 3D 정확도 검증은 아님
-- 실제 서보 영점·백래시·동작 오차는 미반영
+- J2의 Y 좌표 0mm, J4의 Y 좌표 -8mm로 측면 오프셋 존재
+- 평면 좌표 검증이며 완전한 3차원 정확도 검증은 아님
+- 실제 서보 영점·백래시·동작 오차 미반영
 
 ---
 
-## EXP-005 | Preliminary Joint Torque Analysis
+## EXP-005 | 관절 토크 1차 계산
 
-**Date:** 2026-10-26  
-**Status:** Completed — Preliminary Calculation
+**일자:** 2026-10-26  
+**상태:** 예비 계산 완료
 
-### Objective
-실제 모터 선정을 위한 J1~J5 구동부의 기초 하중 및 토크 분석.
+### 목적
 
-### Assumptions
-- L1: 100mm
-- L2: 80mm
-- Target Payload: 20g
-- J3 Servo Mass: 55g
-- J4 Servo Mass: 30g (초기 가정)
-- Gripper Assembly: 40g (초기 가정)
-- Gravity: 9.81m/s²
+J1~J5 실제 모터 선정을 위한 기본 하중 및 토크 분석.
+
+### 초기 가정
+
+- L1: 100mm / L2: 80mm
+- 대상 블록: 20g
+- J3 모터: 55g
+- J4 모터: 30g(초기 가정)
+- 그리퍼 조립체: 40g(초기 가정)
+- 중력가속도: 9.81m/s²
 - J2~J4 설계 여유: 2.5배
 - 링크를 수평으로 펼친 정적 하중 조건
 
-### Results
+### 초기 계산 결과
 
-| Joint | Analysis | Calculated Result |
+| 관절 | 분석 항목 | 계산 결과 |
 |---|---|---:|
-| J1 Base | Rotational Inertia | 0.008868 N·m |
-| J2 Shoulder | Gravity Torque × 2.5 | 6.602 kgf·cm |
-| J3 Elbow | Gravity Torque × 2.5 | 2.351 kgf·cm |
-| J4 Wrist | Gravity Torque × 2.5 | 0.400 kgf·cm |
-| J5 Gripper | Required Normal Force | 0.4905 N / Finger |
+| J1 베이스 | 회전 관성 및 가속 토크 | 0.008868 N·m |
+| J2 어깨 | 중력 토크 × 2.5 | 6.602 kgf·cm |
+| J3 팔꿈치 | 중력 토크 × 2.5 | 2.351 kgf·cm |
+| J4 손목 | 중력 토크 × 2.5 | 0.400 kgf·cm |
+| J5 그리퍼 | 손가락당 수직 파지력 | 0.4905 N |
 
-J1 계산 조건:
+J1 가정: 점질량 근사, 총 관성모멘트 0.004434kg·m², 각가속도 2rad/s².
 
-- Point-Mass Approximation
-- Total Inertia: 0.004434 kg·m²
-- Angular Acceleration: 2 rad/s²
+J5 가정: 블록 20g, 마찰계수 0.4, 안전율 2.
 
-J5 파지력 계산 조건:
+### Hardware R02 — 수정 토크 계산
 
-- Payload: 20g
-- Friction Coefficient: 0.4 (가정)
-- Safety Factor: 2
+J4 모터를 MG90S 13.4g으로 변경하고 J3 모터 55g 유지.
 
-### Hardware R02 — Revised Torque
-
-J4 모터를 MG90S 13.4g으로 변경하고 J3 모터 55g은 유지.
-
-| Joint | Revised Design Torque |
+| 관절 | 수정 설계 토크 |
 |---|---:|
-| J2 Shoulder | 5.855 kgf·cm |
-| J3 Elbow | 2.019 kgf·cm |
-| J4 Wrist | 0.400 kgf·cm |
+| J2 어깨 | 5.855 kgf·cm |
+| J3 팔꿈치 | 2.019 kgf·cm |
+| J4 손목 | 0.400 kgf·cm |
 
-그리퍼 질량 증가에 따른 추가 검토:
+그리퍼 질량 증가에 따른 검토:
 
-| Gripper Mass | J2 Torque | J3 Torque | J4 Torque |
+| 그리퍼 질량 | J2 | J3 | J4 |
 |---|---:|---:|---:|
 | 40g | 5.855 | 2.019 | 0.400 |
 | 60g | 6.855 | 2.519 | 0.500 |
 | 80g | 7.855 | 3.019 | 0.600 |
 
-단위: kgf·cm. 설계 여유 2.5배 포함.
+단위: kgf·cm, 설계 여유 2.5배 포함.
 
-### Limitations
+### 한계
+
 - 실제 CAD 질량 및 무게중심 미반영
-- J1 베이스 자체 관성·마찰 미반영
+- J1 베이스 자체 관성과 마찰 미반영
 - 동적 하중 및 모터 발열 미검증
 - PLA+ 부품 강도·처짐 미검증
 - J5 실제 기구비·마찰 미검증
 
 ---
 
-## EXP-006 | Gripper Concept Design
+## EXP-006 | 그리퍼 Concept 설계
 
-**Date:** 2026-10-26 ~ 2026-10-27  
-**Status:** Completed — Preliminary Layout
+**일자:** 2026-10-26 ~ 2026-10-27  
+**상태:** 예비 형상 설계 완료
 
-### Objective
-30mm 블록을 파지하기 위한 양쪽 연동형 집게의 기본 형상 및 서보 배치 검토.
+### 목적
 
-### Setup
-- Fusion File: `Gripper_Concept_v01`
-- Actuator: SG90 (보유)
-- Gripper Type: Symmetric Two-Finger
-- Target Payload: 30mm Cube
+30mm 블록을 파지하기 위한 양쪽 연동형 집게 기본 형상과 SG90 배치 검토.
 
-### Concept Dimensions
+### 조건
 
-| Parameter | Value |
+- Fusion 파일: `Gripper_Concept_v01`
+- 구동 모터: SG90(보유)
+- 형식: 대칭형 2핑거
+- 대상: 30mm 정육면체
+
+### 개념 치수
+
+| 항목 | 값 |
 |---|---:|
-| Body Width | 72mm |
-| Body Height | 18mm |
-| Finger Pivot Distance | 54mm |
-| Finger Length | 40mm |
-| Initial Closing Angle | 약 12° |
-| Pivot Reference Diameter | Ø4mm |
+| 몸체 너비 | 72mm |
+| 몸체 높이 | 18mm |
+| 손가락 회전축 간격 | 54mm |
+| 손가락 길이 | 40mm |
+| 초기 닫힘각 | 약 12° |
+| 회전축 Reference 지름 | Ø4mm |
 
-### Results
-- 좌우 손가락 회전축 및 기준선 스케치 완료
+### 결과
+
+- 좌우 손가락 회전축과 기준선 스케치 완료
 - 개폐 자세를 위한 초기 각도 스케치 완료
 - SG90 참고 Component 모델링
-- SG90의 집게 중앙 배치 및 측면 위치 확인
+- SG90 중앙 배치와 측면 위치 확인
 - `Gripper_Concept_v01` 저장
 
-### Preliminary Mass Budget
+### 예비 질량 예산
 
-| Component | Estimated Mass |
+| 부품 | 예상 질량 |
 |---|---:|
 | SG90 | 9g |
-| Body & Fingers | 25g |
-| Linkage | 10g |
-| Fasteners & Pads | 8g |
-| **Total** | **52g** |
+| 몸체와 손가락 | 25g |
+| 연동 링크 | 10g |
+| 체결부품 및 패드 | 8g |
+| **합계** | **52g** |
 
-- 목표 질량: 60g 이하
-- 하중 검토 상한: 80g
+목표 질량 60g 이하, 하중 검토 상한 80g.
 
-### Limitations
-- 위 질량은 실측값이 아닌 설계 예산
-- 실제 서보 혼·연동 링크 기구 미완성
-- 손가락의 동시 개폐 및 파지력 미검증
-- 3D 출력 공차·마찰·유격 미검증
+### 한계
+
+- 실제 측정 질량이 아닌 설계 예산
+- 서보혼·연동 링크의 상세 기구 미완성
+- 동시 개폐 및 파지력 미검증
+- 출력 공차·마찰·유격 미검증
 
 ---
 
-## Hardware Procurement Status
+## EXP-007 | J1·J2 실물 치수 및 서보혼 정적 장착 확인
 
-**Date:** 2026-10-27
+**일자:** 2026-10-28 ~ 2026-11-01  
+**상태:** 일부 실측 및 정적 장착 확인 완료 / 구동 시험 전
 
-| Joint | Selected Motor | Status |
+### 목적
+
+제작용 CAD 설계에 필요한 실제 모터·서보혼·베어링 치수를 수집하고, 설계 후보 간 간섭 가능성을 평가한다.
+
+### 실측 데이터
+
+| 대상 | 측정 부위 | 실측값 |
+|---|---|---:|
+| J1 사각 베어링 | 외형 | 71.82 × 71.82mm |
+| J1 사각 베어링 | 두께 | 7.95mm |
+| J1 사각 베어링 | 중앙 개구부 | Ø35mm |
+| J1 사각 베어링 | 체결홀 지름·측정 중심 간격 | 약 Ø4.14mm / 57.28mm |
+| MG996R 원형 서보혼 | 외경 | 20.72mm |
+| MG996R 십자형 서보혼 | 끝과 끝 전체 길이 | 36.79mm |
+| MG996R 6방향 서보혼 | 끝과 끝 회전 외경 | 31.77mm |
+| MG996R 6방향 서보혼 | 모터 하우징 윗면 → 날개 윗면 | 8.44mm |
+| MG996R 6방향 서보혼 | 반대 날개 바깥쪽 홀 중심 간격 | 26.53mm |
+| MG996R 6방향 서보혼 | 작은 체결홀 지름 | Ø1.49mm |
+| MG996R 6방향 서보혼 | 날개 두께 | 2.36mm |
+| J2 FT5330M | 본체 길이 × 폭 | 39.98 × 20.09mm |
+| J2 FT5330M | 본체 기본 높이 / 돌출 포함 | 39.60 / 42.20mm |
+| J2 FT5330M | 장착 귀 포함 전체 길이 | 55.26mm |
+| J2 FT5330M | 장착 귀 홀 지름 | 약 Ø4.46mm |
+| J2 FT5330M | 체결홀 중심 간격 | 약 48.13 × 10.06mm |
+| J2 FT5330M | 스플라인 / 금속 혼 허브 외경 | Ø5.87 / Ø14.93mm |
+
+### MG996R 서보혼 비교 결과
+
+- **원형(Ø20.72mm):** 출력축에 일부 끼워졌지만 정상 결합 깊이와 고정 상태를 확인하기 어려워 보류.
+- **십자형(36.79mm):** 중앙 고정나사가 정상 체결되고 출력축 대비 흔들림 없음. 다만 베어링 Ø35mm 개구부보다 큼.
+- **6방향(31.77mm):** 출력축과 중앙 나사가 정상 체결되고 가벼운 정적 흔들림 확인에서 독립 유격 없음. J1 연결부 설계의 우선 후보로 채택.
+
+6방향 혼과 베어링 중앙이 이상적으로 동축이고 베어링 내부에 추가 돌출이 없다는 조건에서 계산한 반경 방향 여유는:
+
+**반경 여유 = (35.00 - 31.77) / 2 = 1.615mm**
+
+Fusion에서 모터의 평평한 하우징 윗면과 베어링 아랫면 사이 거리는 **2.00mm**. 실측 서보혼 날개 윗면 높이 8.44mm를 적용하면 혼이 베어링 높이 영역으로 진입하므로 **실제 베어링 내부 형상 검증이 필요함**.
+
+### 판정 및 한계
+
+- 서보혼의 **정적 장착은 확인**했지만 회전 토크, 반복 구동, 충격 하중에 대한 체결 강도는 확인하지 않음.
+- 베어링 양쪽 판의 홀 배열과 내부 볼 레이스 형상은 단순화 Reference에 정확히 반영되지 않았음.
+- 모터 전원 연결·동작 범위·전류·발열 시험은 진행하지 않음.
+
+---
+
+## EXP-008 | J1·J2 제작용 CAD 및 3D 프린팅 준비
+
+**일자:** 2026-10-28 ~ 2026-11-01  
+**상태:** CAD·슬라이싱 작업 완료 항목 보유 / 실제 출력·조립 전
+
+### 목적
+
+실측 치수를 Fusion 제작용 Assembly에 반영하고, 시험 출력에 필요한 모델과 G-code를 준비한다. 현재 단계에서 설계 후보와 물리적 검증 완료 항목을 명확히 구분한다.
+
+### 주요 CAD 결과
+
+| 부품·설계 | 적용 내용 | 현재 상태 |
 |---|---|---|
-| J1 Base | MG996R Compatible | Ordered |
-| J2 Shoulder | FEETECH FT5330M | Ordered |
-| J3 Elbow | MG996R Compatible | Ordered |
-| J4 Wrist | TowerPro MG90S | Ordered |
-| J5 Gripper | SG90 | Already Owned |
+| `Base_Fixed` | Ø160 × 6mm, 경량화 홀 Ø12 × 6 | CAD 및 G-code 준비 |
+| J1 지지 기둥 3개 | Ø12 × 37mm, 리브, 인서트 후보 Ø4.0 × 깊이 7mm | CAD 및 G-code 준비 |
+| J1 MG996R 브래킷 | 모터 삽입 슬롯, 고정 탭, 케이블 노치 | 시험 출력 파일 준비 |
+| `J1_Bearing_Mount_Fixed` | 외경 Ø110 / 내경 Ø70 / 두께 5mm, 총 7개 홀 | CAD 및 G-code 준비 |
+| `Base_Rotating` | 외경 Ø110 / 두께 6.40mm | CAD WIP, 출력 보류 |
+| `Base_Rotating` 베어링 체결홀 | Ø4.5 관통홀 × 4 | CAD 형상 있음, 실물 맞춤 전 |
+| `Base_Rotating` J2 결합홀 | Ø4.0 × 깊이 4.5mm 블라인드 홀 × 4 | 인서트 규격 미확정 |
+| J2 FT5330M 레일 | 모터 장착 후보 형상 | 시험 출력 파일 준비 |
 
-모터 모델 선정 및 주문 완료. 실제 성능 검증과 제작용 장착 치수 확정은 미완료.
+`Base_Rotating` 두께는 기존 5mm에서 아랫면을 1.40mm 확장한 **6.40mm**로 변경했고 윗면 위치는 유지했다.
 
-전원 어댑터, 전압 변환기, 베어링, 축, 체결 부품은 추가 선정·구매 예정.
+### STEP 43-F — 서보혼 연결 구조 설계 경과
+
+1. MG996R에 장착 가능한 6방향 혼의 회전 외경 **Ø31.77mm**를 Fusion Sketch Reference로 작성.
+2. 바깥 체결홀 중심 간격 **26.53mm**를 피치원 후보로 반영하고, 6개 작은 홀 위치 표시.
+3. 120° 간격의 체결 위치 3개를 `Base_Rotating` 아랫면 Sketch에 투영.
+4. 회전판 아랫면에 **Ø32.5mm 외경 / Ø10mm 중앙 회피 구멍 / 1.56mm 돌출** 연결 패드 후보 생성.
+5. 체결용 **Ø2.4mm 후보 원 3개** 작성. 관통 가공과 나사 머리 매립 가공은 아직 확정하지 않음.
+6. J2 바닥판 아랫면과 `Base_Rotating` 윗면 사이 간격이 **0mm**임을 Fusion에서 확인.
+
+**설계 판단:** 나사 머리가 회전판 윗면보다 돌출되면 J2 바닥판과 간섭할 수 있으므로, 실제 나사 규격에 따른 매립 깊이와 다른 체결홀 사이 잔여 두께를 재검토해야 함.
+
+### 준비한 G-code 작업
+
+| 작업 | 슬라이싱 예상 시간 | 예상 재료 |
+|---|---:|---:|
+| `J1_MG996R_Bracket_Test_v01` | 1시간 23분 | 12.66g |
+| `J2_FT5330M_Rail_Test_v01` | 1시간 30분 | 15.22g |
+| `M3_Insert_Tolerance_Test_v01` | 27분 | 4.35g |
+| `Base_Fixed` | 5시간 22분 | 73.60g |
+| J1 지지 기둥 3개 통합 작업 | 1시간 19분 | 11.33g |
+| `J1_Bearing_Mount_Fixed_v01` | 1시간 52분 | 22.06g |
+| **합계(순차 출력 가정)** | **11시간 53분** | **139.22g** |
+
+**G-code 6개 작업 / 대상 부품 8개.** 슬라이서 예측치이며 실측 출력 시간이나 실제 무게가 아님.
+
+### 제작 일정
+
+- **첫 출력 예약:** 2026-11-06(금) 오전 10시
+- **장소:** 연세대학교 메이커스페이스 i7, 송도
+- **슬라이서:** Cubicreator4
+- **주요 장비:** Cubicon Single Plus 3DP-310F
+- **기본 설정:** PLA-PLUS, 0.2mm 레이어, 노즐 220°C, 베드 65°C(부품별 설정 재확인)
+
+11월 1일 기준으로 **실제 출력한 부품은 없음**. 2대 동시 사용 가능 여부도 아직 확정되지 않음.
+
+### 첫 출력 후 검증 항목
+
+1. 기둥 3개가 G-code에 모두 포함되어 있는지 및 출력 방향·Brim 점검.
+2. MG996R 브래킷과 FT5330M 레일의 삽입·고정 여유 확인.
+3. M3 인서트 제품 권장 치수와 Ø3.8 / Ø4.0 / Ø4.2mm 시험편 결과 비교.
+4. 사각 턴테이블 베어링 홀 배열, 볼트·와셔·나사 머리 접근 공간 확인.
+5. 실제 서보혼 체결나사·매립·조립 순서 및 회전 간섭 검증 후 `Base_Rotating` 출력 승인.
+
+### 한계
+
+- 아직 PLA+ 출력물의 수축·공차·강도 검증을 수행하지 않음.
+- 베어링 Reference의 내부 레이스와 볼트 간섭은 단순화 모델로는 최종 판단할 수 없음.
+- `Base_Rotating`의 1.56mm 연결 패드는 **임시 CAD 형상**이며, 혼 날개와 실제 접촉하는지 검증되지 않음.
+- 출력 전 구조 검증과 출력 후 실물 조립 검증은 별도로 수행해야 함.
 
 ---
 
-## Next Experiments
+## 하드웨어 확보 및 검증 상태
 
-- [ ] EXP-007 — Servo Dimension & Position Control Test
-- [ ] EXP-008 — Gripper Linkage and Mass Verification
-- [ ] EXP-009 — Joint Load & Structural Verification
-- [ ] EXP-010 — Integrated Arm Motion Test
-- [ ] EXP-011 — Camera-to-Robot Coordinate Calibration
-- [ ] EXP-012 — Automated Pick & Place Test
+**최초 선정:** 2026-10-27 / **상태 업데이트:** 2026-11-01
 
-최종 시스템 완성 후 20회 반복 Pick & Place 실험을 수행하고, 성공률·위치 오차·실패 원인을 정량적으로 기록할 예정.
+| 관절 | 모터 | 현재 확인 상태 |
+|---|---|---|
+| J1 Base | MG996R 호환 | 실물 보유·서보혼 정적 체결 확인 / 동작 시험 전 |
+| J2 Shoulder | FEETECH FT5330M | 실측 치수 CAD 반영 / 동작 시험 전 |
+| J3 Elbow | MG996R 호환 | 선정 완료 / 최종 브래킷 미완성 |
+| J4 Wrist | TowerPro MG90S | 선정 완료 / 제작용 CAD 미완성 |
+| J5 Gripper | SG90 | 기존 보유 / 집게 파지력 미검증 |
+
+서보 전원 어댑터·변환기 및 M3 열압입 인서트의 구매 규격은 아직 확정되지 않았으며, J1 사각 턴테이블 베어링은 실물 실측을 수행함.
+
+---
+
+## 다음 실험
+
+- [ ] **EXP-009** — 서보모터 전원·입력각·전류·발열 및 반복 구동 시험
+- [ ] **EXP-010** — 그리퍼 연동 기구 조립·질량·파지력 확인
+- [ ] **EXP-011** — 관절 하중·링크 강도·처짐 및 지지 구조 검증
+- [ ] **EXP-012** — 로봇팔 전체 관절 구동·모션 제어 통합 시험
+- [ ] **EXP-013** — 카메라 픽셀 좌표와 로봇 작업 좌표 보정
+- [ ] **EXP-014** — 색상 지정 자동 Pick & Place 통합 및 20회 이상 반복 성능 시험
+
+**최종 검증 지표:** 색상 인식 정확도, 위치 오차, 반복 정밀도, 집기 성공률, 1회 사이클 시간. 실물 실험 후 수치와 실패 원인을 기록할 예정.
