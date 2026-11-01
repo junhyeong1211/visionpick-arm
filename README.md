@@ -297,15 +297,6 @@ visionpick-arm/
 - [실험·측정 기록](docs/experiments.md)
 - [설계 의사결정 기록](docs/design-decisions.md)
 
-### CAD 스냅샷 업로드 계획
-
-추후 아래 위치에 이미지를 업로드해 README와 개발 기록에 연결할 예정. **현재 PNG 파일은 미업로드 상태**이므로 깨진 이미지 링크를 표시하지 않음.
-
-- `media/photos/assembly-overview-wip.png` — 전체 Assembly 등각 뷰, README 대표 이미지
-- `media/photos/j1-coupling-wip.png` — J1 베어링·회전판·서보혼 상세
-- `media/photos/j1-section-wip.png` — J1 중심축 단면과 간섭 검토
-
----
 
 ## 실행 방법
 
