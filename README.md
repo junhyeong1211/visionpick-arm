@@ -81,7 +81,6 @@ Arduino GND ↔ 서보 전원 GND 공통 (각 +전압은 혼합 금지)
 
 ![건조 중인 J1 지지 기둥](media/photos/2026-11-14_j1-support-posts-paint-drying.jpg)
 
-![Base_Fixed 뒷면 매립홈](media/photos/2026-11-14_j1-base-fixed-underside-recesses.jpg)
 
 ### 최우선 조립 리스크
 
