@@ -88,7 +88,7 @@ HUSKYLENS → Arduino I2C SDA(A4), SCL(A5)
 - [J1~J5 조립 전경](media/photos/2026-11-23_assembled-arm-overview-photo-shared.jpg)
 - [11/14 베이스 부분 조립 기록](media/photos/2026-11-14_j1-base-servo-mount-support-posts-wip.jpg)
 
-**CAD 공개 상태:** 현재 저장소에는 11월 1일·2일 `WIP.f3d`만 존재하고 `cad/stl/`에는 최종 STL이 없다. **실제 최신 Fusion 파일을 내보내기 전에는 최종 CAD 업로드 완료로 표시하지 않는다.**
+**CAD 공개 상태: 2026-11-23 v01 Fusion Assembly 원본 업로드 완료. J1~J5 실물 조립 및 개별 모터 구동을 확인했으며, 시험한 동작 범위에서 기구적 간섭은 발견되지 않았다. 전체 가동 범위 및 복합 관절 동작의 간섭 검증과 CAD·실물 치수 대조는 추가 진행 예정이며, 최종 STL은 아직 등록하지 않았다.
 
 ## 7. 포트폴리오·재현성 원칙
 
