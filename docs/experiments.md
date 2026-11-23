@@ -605,9 +605,7 @@ G_tip = 34 - 40[sin(theta1) - sin(theta2)] - 2[cos(theta1) + cos(theta2)]
 |---|---|---|
 | [베이스 전체](../media/photos/2026-11-14_j1-base-servo-mount-support-posts-wip.jpg) | Base_Fixed, MG996R, 금색 브래킷, 지지 기둥 3개 배치 | 기둥 하단 볼트 체결/전체 체결력 미확정 |
 | [서보/기둥 근접](../media/photos/2026-11-14_j1-mg996r-bracket-inserts-detail.jpg) | MG996R 장착 및 상부 황동색 나사산 부품 관찰 | 상·하 모든 인서트 설치·인발강도 미확정 |
-| [베이스 밑면](../media/photos/2026-11-14_j1-base-fixed-underside-recesses.jpg) | 검은 출력판에 홀·매립홈 존재 | 2+3 홈의 실제 깊이/나사 머리 높이는 미측정 |
 | [도색 기둥](../media/photos/2026-11-14_j1-support-posts-paint-drying.jpg) | 검정색 지지 기둥 도색 진행 | 도료 경화·치수 변화·강도 미시험 |
-| [회전판](../media/photos/2026-11-14_j1-base-rotating-painted-holes.jpg) | 금색 회전판, 큰 베어링홀 4개 및 소형 홀 존재 | 6방향 혼 실조립·M4 간섭 미시험 |
 | [서보혼](../media/photos/2026-11-14_j1-six-arm-plastic-servo-horn.jpg) | 구멍이 여러 개 있는 6방향 플라스틱 혼 존재 | Ø1.49mm 기존 실측과 출력 홀 정렬 여부는 재검증 |
 | [J2 CAD 참고](../media/photos/2026-11-14_j2-opposite-pivot-cad-reference.jpg) | 종동측 J2 링크의 중심/반대편 축 위치를 CAD 화면으로 볼 수 있음 | 실제 M3 축·부싱/너트 체결 미검증 |
 | [J2 실물 참고](../media/photos/2026-11-14_j2-shoulder-plate-fitup-wip.jpg) | J2 골드/블랙 출력 부품의 실물 맞대기 | 실제 토크 구동·최종 체결 미검증 |
