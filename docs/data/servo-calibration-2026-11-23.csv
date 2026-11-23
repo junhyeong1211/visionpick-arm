@@ -1,0 +1,6 @@
+﻿joint,motor,reference_pose,kinematic_reference_deg,servo_command_at_reference_deg,direction_of_increasing_command,safe_min_command_deg,safe_max_command_deg,measured_supply_voltage_V,evidence_status,notes
+J1,MG996R,정면 기준,0,,,,,미측정,보정 전; 임의로 90°를 입력하지 않음
+J2,FT5330M,L1 수직 (수평=0° 가정),90,,,,,미측정,보정 전; 임의로 90°를 입력하지 않음
+J3,MG996R,L1-L2 일직선,0,,,,,미측정,보정 전; 임의로 90°를 입력하지 않음
+J4,MG90S,그리퍼 중심축과 L2 기준 정렬,0,,,,,미측정,보정 전; 임의로 90°를 입력하지 않음
+J5,SG90,그리퍼 완전 열림 (개구 폭 mm도 기록),,,,,,미측정,보정 전; 임의로 90°를 입력하지 않음
